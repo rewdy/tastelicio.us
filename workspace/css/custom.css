@@ -1,0 +1,185 @@
+/*
+
+Tasty Custom CSS
+
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic);
+
+/* html5 elements */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+
+/* essentials */
+body {background-color:#222; color:#ccc;}
+div#top {padding:60px 0 40px 0; background:#fff; color:#222; min-height:400px}
+
+/* layout */
+header#site_header {position:relative;}
+header#site_header h1 {border-bottom:1px solid #666; padding-bottom:40px;}
+header#site_header h1 a, header#site_header h1 a:visited {color:#222; text-decoration:none;}
+header#site_header h1 a:hover {text-decoration:underline; background-color:transparent;}
+header#site_header h2 {display:none; font-size:16px; color:#ccc;}
+header#site_header .stationary {width:auto;}
+
+footer#site_footer {clear:both; padding:20px 0;}
+footer#site_footer p {margin:10px 0;}
+
+/* nav styles */
+nav#site {}
+ul.nav_list {margin:0 0 20px 0; padding:0;}
+ul.nav_list li {margin:0; padding:0; list-style:none; display:block;}
+ul.nav_list li a {display:block; color:#444; text-decoration:none; font-family:"Cabin", sans-serif; font-size:20px;}
+ul.nav_list li.current a {color:#222; font-weight:700;}
+ul.nav_list li a:hover {color:#000;}
+
+/* content section */
+section#content {}
+section.content_single {margin-bottom:20px;}
+
+/* entry styles */
+article.entry, article.comment {margin-bottom:20px;}
+article.listed {border-bottom:1px solid #bbb; padding-bottom:20px; margin-bottom:20px;}
+article.embedded {padding:10px 0; border-top:10px solid #f2f2f2;}
+article h2 a, article h2 a:visited, article h3 a, article h3 a:visited {color:#333; text-decoration:none;}
+article h2 a:hover, article h3 a:hover {color:#000; background-color:#faad00;}
+article div.date {display:inline-block; background-color:#ed3725; color:#fff; padding:3px 6px; margin-bottom:20px;}
+article.single footer {padding:20px 0; }
+article.comment footer {padding-top:0;}
+article .meta {color:#999; font-size:11px;}
+
+article section#comments {border-top:1px solid #999;}
+
+ul.attached_images_list {margin:0 0 10px 0; padding:0;}
+ul.attached_images_list li {margin:0; padding:0; list-style:none;}
+ul.slide_show {position:relative;}
+ul.slide_show li {position:absolute; top:0; left:0; opacity:0;}
+
+ul.pagination {text-align:center;}
+ul.pagination li {display:inline-block; list-style:none; padding:0; margin:0 2px 0 0;}
+ul.pagination li a {display:inline-block; padding:2px 8px; text-decoration:none;}
+ul.pagination li a:hover {background-color:#faad00; }
+ul.pagination li.selected a {background-color:#ed3725; color:#fff; cursor:default;}
+ul.pagination li.disabled a {background-color:transparent; color:#999; cursor:default; }
+
+.sharing {}
+.grid_3 .sharing iframe {margin-bottom:10px;}
+.entry_links {margin-top:20px;}
+
+/* comment styles */
+section#comments {padding-top:20px;}
+
+ol.comment_list li {list-style:none;}
+
+
+/* page link styles */
+
+/* links that show you the next and previous post when you are looking at a single post */
+#directional_links {}
+/* links that show you the older and newer pages of listing on a post listing page */
+#listing_page_links {}
+/* when a post is split into multiple pages, this is the style the post page links */
+p.post_page_links {display:inline-block; border:1px solid #ccc; padding:2px 7px; word-spacing:0.2em;}
+p.post_page_links strong {font-size:11px; text-transform:uppercase;}
+
+.back_holder {clear:both; padding:10px; background:url(../img/bg/diag.png); }
+
+.stationary {position:fixed; width:inherit;}
+
+/* widgets */
+.widget h4 {font-size:17px; line-height:22px; margin-bottom:0; background-color:#333; color:#ccc; padding:5px 10px;}
+.widget ul {margin:0; padding:0;}
+.widget ul li {list-style:none; margin:0; padding:0;}
+.widget a, .widget a:visited {display:block; padding:5px; border-bottom:1px solid #444; text-decoration:none; }
+.widget a:hover {color:#fff; background-color:transparent;}
+
+footer section.widget form#searchform {padding:5px 0;}
+footer section.widget form#searchform input[type=text] {background-color:#272727; color:#fff; border-color:#444; width:278px;}
+footer section.widget form#searchform input[type=text]:focus {
+	border-color:#faad00;	
+	background-color:#171717;
+}
+
+/* type + tags */
+
+h1, h2, h3, h4, h5, h6 {font-family:"Cabin"; font-weight:700; line-height:1.5em;}
+h1 {font-size:24px; }
+h2 {font-size:36px; position:relative; top:-4px;}
+h3 {font-size:20px;}
+h4 {font-size:16px; font-weight:1000;}
+p:last-child {margin-bottom:0;}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {padding-right:10px;}
+a, a:visited {color:#ed3725; -webkit-transition:all 0.2s ease-in; -moz-transition:all 0.2s ease-in;}
+a:hover {color:#000; background-color:#faad00; text-decoration:none;}
+
+table {border:1px solid #ddd; border-collapse:collapse;}
+table tr th {padding:10px 10px 3px 5px; text-align:left; border-bottom:1px solid #ddd; border-right:1px solid #ddd;}
+table tr td {padding:3px 10px 3px 5px; border-bottom:1px solid #ddd; border-right:1px solid #ddd;}
+table tr:nth-child(odd) td {background-color:#f8f8f8;}
+
+/* forms */
+
+form.comment_form {padding-top:15px; border-top:1px solid #999; margin-bottom:20px;}
+
+.form_item {margin-bottom:5px;}
+label {}
+
+input.text, input[type=text], input[type=password], textarea, select, button, input.button, input[type=button], input[type=submit], input[type=reset] {padding:5px; font:normal 13px/20px "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-transition:all 0.2s ease-in; -moz-transition:all 0.2s ease-in;}
+
+input.text, input[type=text], input[type=password], textarea, select {border:1px solid #ccc; background-color:#f2f2f2;}
+input.text:focus, input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus { border-color:#faad00; background-color:#fff; }
+
+form.comment_form .grid_3 input[type=text] {width:198px}
+form.comment_form .grid_6 textarea {width:438px; height:138px;}
+
+form input[type=submit], form input[type=button] {padding:5px 10px; background-color:#ed3725; border:0 none; color:#fff; cursor:pointer;}
+form input[type=submit]:hover, form input[type=button]:hover {background-color:#faad00;}
+
+form .actions {}
+
+/* util */
+.hide {display:none;}
+.textleft {text-align:left;}
+.textcenter {text-align:center;}
+.textright {text-align:right;}
+
+.attn {font-size:1.15em;}
+.quiet {color:#999;}
+.small {font-size:11px;}
+
+.placeholder {background:#e6e6e6 url(../img/bg/empty-image.png) no-repeat center center;}
+
+.notice {
+	border:3px solid #000; 
+	padding:10px;
+	box-shadow:0 0 10px #ccc;
+	background: #fff; /* Old browsers */
+}
+.success:before {
+	content:" ";
+	display:inline-block;
+	width:12px;
+	height:12px;
+	margin-right:10px;
+	overflow:hidden;
+	background-color:#408130;
+	position:relative;
+	top:1px;
+}
+.error:before {
+	content:" ";
+	display:inline-block;
+	width:12px;
+	height:12px;
+	margin-right:12px;
+	overflow:hidden;
+	background-color:#ed3725;
+	position:relative;
+	top:1px;
+}
+
+/* a few cse resets */
+.cse .gsc-control-cse,
+.gsc-control-cse {
+	padding:0!important;
+}
