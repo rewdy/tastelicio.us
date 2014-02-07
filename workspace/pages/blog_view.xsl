@@ -8,11 +8,13 @@
 <xsl:include href="../utilities/sharing.xsl" />
 
 <xsl:template match="/data">
+
 	<xsl:apply-templates select="//events/entry-save-comment" />
-	<section id="entry_single" class="content_single">
-		<xsl:apply-templates select="entry-single/entry" />
-	</section>
-	<div class="back_holder"><a href="{$root}/blog">Back to blog</a></div>
+
+	<xsl:apply-templates select="entry-single/entry" />
+
+	<p><a href="{$root}" class="home-link"><i class="fa fa-caret-left"></i> Home</a></p>
+
 </xsl:template>
 
 <xsl:template match="data" mode="page-title">
@@ -20,72 +22,71 @@
 </xsl:template>
 
 <xsl:template match="entry-single/entry">
-	<article class="entry single">
-		<header>
-			<h2><xsl:value-of select="entry-title" /></h2>
-			<div class="date">
-				<xsl:call-template name="format-date">
-					<xsl:with-param name="date" select="publish-date"/>
-					<xsl:with-param name="format" select="'M x, Y'"/>
-				</xsl:call-template>
-			</div>
-		</header>
-		<xsl:apply-templates select="attached-images" />	
-		<xsl:copy-of select="entry-full-text/node()" />
+
+<article class="entry">
+	
+	<xsl:apply-templates select="attached-images" />
+
+	<h1><a href="{$root}/blog/view/{entry-title/@handle}" rel="permalink" title="Read article..."><xsl:value-of select="entry-title" /></a></h1>
+	
+	<xsl:copy-of select="entry-full-text/node()" />
 		
-		<xsl:apply-templates select="recipe/item" />
-		
-		<footer>
-			<div class="sharing">
-				<xsl:call-template name="twitter-button">
-					<xsl:with-param name="data-count" select="'horizontal'" />
-					<xsl:with-param name="data-text" select="entry-title" />
-				</xsl:call-template>
-				<xsl:call-template name="facebook-like">
-					<xsl:with-param name="url-to-like" select="$current-url" />
-					<xsl:with-param name="font" select="'arial'" />
-					<xsl:with-param name="width" select="275" />
-				</xsl:call-template>
-			</div>
-			<div class="entry_links">
-				<a href="{$root}/blog/view/{entry-title/@handle}" rel="permalink">Permalink</a> 
-				<xsl:if test="not(disable-comments) or disable-comments = 'no'">
-				| <a href="#comments">Leave a Comment</a>
-				</xsl:if>
-			</div>
-		</footer>
-		<xsl:apply-templates select="//entry-comments" />
-	</article>
-	<xsl:if test="not(disable-comments) or disable-comments = 'No'">
-		<form method="post" action="" enctype="multipart/form-data" class="comment_form">
-			<h3 id="respond">Leave a Comment</h3>
-			<input name="MAX_FILE_SIZE" type="hidden" value="5242880" />
-			<input name="fields[for-post]" type="hidden" value="{entry-title}" />
-			<div class="grid_3 alpha">
-				<div class="form_item">
+	<xsl:apply-templates select="recipe/item" />
+	
+	<div class="links">
+		<ul class="link-list">
+			<li><a href="{$root}/blog/view/{entry-title/@handle}" title="Permalink" class="perma-link"><i class="fa fa-link"></i> <span class="text">Permalink</span></a></li>
+			<xsl:if test="not(disable-comments) or disable-comments = 'No'">
+				<li><a href="#respond" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
+			</xsl:if>
+		</ul>
+	</div>
+
+	<div class="details">
+		<xsl:call-template name="format-date">
+			<xsl:with-param name="date" select="publish-date"/>
+			<xsl:with-param name="format" select="'M x, Y'"/>
+		</xsl:call-template>
+	</div>
+
+	<p class="center">Sharing goes here eventually</p>
+</article>
+
+<xsl:apply-templates select="//entry-comments" />
+
+<xsl:if test="not(disable-comments) or disable-comments = 'No'">
+	<form method="post" action="" enctype="multipart/form-data" class="comment_form">
+		<h3 id="respond">Leave a Comment</h3>
+		<input name="MAX_FILE_SIZE" type="hidden" value="5242880" />
+		<input name="fields[for-post]" type="hidden" value="{entry-title}" />
+		<div class="row clearfix">
+			<div class="g6">
+				<div class="form-item">
 					<label for="fields[name]">Name</label>
-					<div class="input_holder"><input name="fields[name]" type="text" class="text" /></div>
+					<div class="input-holder"><input name="fields[name]" type="text" /></div>
 				</div>
-				<div class="form_item">
+				<div class="form-item">
 					<label for="fields[email]">Email</label>
-					<div class="input_holder"><input name="fields[email]" type="text" class="text" /></div>
+					<div class="input-holder"><input name="fields[email]" type="text" /></div>
 				</div>
-				<div class="form_item">
-					<label for="fields[website]">Website</label><span class="quiet"> (Optional)</span>
-					<div class="input_holder"><input name="fields[website]" type="text" class="text" /></div>
+				<div class="form-item">
+					<label for="fields[website]">Website</label><span class="small quiet"> (Optional)</span>
+					<div class="input-holder"><input name="fields[website]" type="text" /></div>
 				</div>
 			</div>
-			<div class="grid_6 omega">
-				<div class="form_item">
+			<div class="g6">
+				<div class="form-item">
 					<label for="fields[comment]">Comment</label>
-					<div class="input_holder"><textarea name="fields[comment]" rows="5" cols="50"></textarea></div>
+					<div class="input-holder"><textarea name="fields[comment]" rows="9" cols="50"></textarea></div>
 				</div>
 			</div>
-			<div class="form_item clear actions">
-				<div class="input_holder"><input name="action[entry-save-comment]" type="submit" value="Submit Comment" class="button submit" /></div>
-			</div>
-		</form>
-	</xsl:if>
+		</div>
+		<div class="form-item submit">
+			<div class="input-holder"><input name="action[entry-save-comment]" type="submit" value="Submit Comment" class="button submit" /></div>
+		</div>
+	</form>
+</xsl:if>
+
 </xsl:template>
 
 <xsl:template match="entry-comments">
@@ -100,7 +101,7 @@
 <xsl:template match="entry-comments/entry">
 	<article class="comment">
 		<xsl:copy-of select="comment/node()" />
-		<footer class="meta">
+		<div class="details">
 			Posted by 
 			<xsl:choose>
 				<xsl:when test="website">
@@ -118,7 +119,7 @@
 				<xsl:with-param name="date" select="date-modified"/>
 				<xsl:with-param name="format" select="'t, M x, Y'"/>
 			</xsl:call-template>.
-		</footer>
+		</div>
 	</article>
 </xsl:template>
 

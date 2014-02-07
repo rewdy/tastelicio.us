@@ -7,10 +7,8 @@
 <xsl:include href="../utilities/sharing.xsl" />
 
 <xsl:template match="/data">
-	<section id="recipe_single" class="content_single">
-		<xsl:apply-templates select="recipe-single/entry" />
-	</section>
-	<div class="back_holder"><a href="{$root}/recipes">Back to recipes</a></div>
+	<xsl:apply-templates select="recipe-single/entry" />
+	<p><a href="{$root}/recipes" class="home-link"><i class="fa fa-caret-left"></i> Recipes</a></p>
 </xsl:template>
 
 <xsl:template match="data" mode="page-title">
@@ -18,39 +16,31 @@
 </xsl:template>
 
 <xsl:template match="recipe-single/entry">
-	<article class="recipe single clearfix">
-		<div class="grid_6 alpha">
-			<h2><xsl:value-of select="title" /></h2>
-			<xsl:copy-of select="intro/node()" />
-			
-			<xsl:if test="photo">
-			<div class="recipe_img">
-				<img src="{$root}/image/2/450/300/5{photo/@path}/{photo/filename}" alt="Photo of {title}" title="Photo of {title}" />
-			</div>
-			</xsl:if>
-			
-			<h4>Ingredients</h4>
+
+	<article class="recipe single">
+		<h1><xsl:value-of select="title" /></h1>
+		
+		<xsl:if test="photo">
+		<div class="feature-image">
+			<img src="{$root}/image/2/900/600/5{photo/@path}/{photo/filename}" alt="Photo of {title}" title="Photo of {title}" width="900" height="600" />
+			<span class="tag">Recipe</span>
+		</div>
+		</xsl:if>
+
+		<div class="attn"><xsl:copy-of select="intro/node()" /></div>
+		
+		<section class="ingredients">
+			<h2>Ingredients</h2>
 			<xsl:copy-of select="ingredients/node()" />
-			
-			<h4>Method</h4>
+		</section>
+		
+		<section class="method">
+			<h2>Method</h2>
 			<xsl:copy-of select="method/node()" />
-			
-			<p class="quiet">Prep time: <xsl:value-of select="prep-time" /> | Total time: <xsl:value-of select="total-time" /></p>
-		</div>
-		<div class="grid_3 omega">
-			<div class="stationary">
-				<div class="sharing">
-					<xsl:call-template name="twitter-button">
-						<xsl:with-param name="data-count" value="horizontal" />
-						<xsl:with-param name="data-text" value="'{title}'" />
-					</xsl:call-template><br />
-					<xsl:call-template name="facebook-like">
-						<xsl:with-param name="url-to-like" value="{$root}/recipes/view/{title/@handle}" />
-						<xsl:with-param name="font" value="'arial'" />
-					</xsl:call-template>
-				</div>
-			</div>
-		</div>
+		</section>
+		
+		<div class="details">Prep time: <xsl:value-of select="prep-time" /> | Total time: <xsl:value-of select="total-time" /></div>
+
 	</article>
 </xsl:template>
 	

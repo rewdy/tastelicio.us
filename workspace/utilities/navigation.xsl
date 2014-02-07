@@ -7,34 +7,38 @@
 </xsl:template>
 
 <xsl:template match="navigation">
-	<ul id="primary_nav" class="nav_list">
+	<ul id="primary_nav" class="menu">
 		<xsl:apply-templates select="page[not(types/type = 'hidden') and not(types/type = 'admin')]"/>
 	</ul>
 </xsl:template>
 
 <xsl:template match="page-nav">
-	<ul id="page_nav" class="nav_list">
+	<ul id="page_nav" class="menu">
 		<xsl:apply-templates select="entry" />
 	</ul>
 </xsl:template>
 
 <xsl:template match="navigation/page">
 	<li>
-		<xsl:if test="@handle = $root-page">
-			<xsl:attribute name="class">current</xsl:attribute>
-		</xsl:if>
-		<a href="{$root}/{@handle}/"><xsl:value-of select="name"/></a>
+		<a href="{$root}/{@handle}/">
+			<xsl:if test="@handle = $root-page">
+				<xsl:attribute name="class">active</xsl:attribute>
+			</xsl:if>
+			<xsl:value-of select="name"/>
+		</a>
 	</li>
 </xsl:template>
 
 <xsl:template match="page-nav/entry">
 	<li>
-		<xsl:if test="$current-page = 'page'">
-			<xsl:if test="$title = page-title/@handle">
-				<xsl:attribute name="class">current</xsl:attribute>
+		<a href="{$root}/page/{page-title/@handle}">
+			<xsl:if test="$current-page = 'page'">
+				<xsl:if test="$title = page-title/@handle">
+					<xsl:attribute name="class">active</xsl:attribute>
+				</xsl:if>
 			</xsl:if>
-		</xsl:if>
-		<a href="{$root}/page/{page-title/@handle}"><xsl:value-of select="menu-label" /></a>
+			<xsl:value-of select="menu-label" />
+		</a>
 	</li>
 </xsl:template>
 

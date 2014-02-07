@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+{% if meta.description %}
+		<meta name="description" content="{{ meta.description }}"> 
+{% endif %}{% if meta.robots %}
+		<meta name="robots" content="{{ meta.robots }}">
+{% endif %}
+	
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="{{ theme_url }}/lib/fonts/font-awesome-4.0.3/css/font-awesome.min.css" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="{{ theme_url }}/css/style.css" type="text/css" />
+
+		<!-- Javascript -->
+		<script type="text/javascript" src="{{ theme_url }}/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="{{ theme_url }}/js/script.js"></script>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<!-- Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
+	</head>
+	<body>
+
+		<div id="control">
+			
+			<div id="drawer">
+				<nav>
+					<ul class="menu">
+						{% for item in menu_items %}
+						<li><a href="{{ item.url }}"{% if item.current %} class="active"{% endif %}>{{ item.title }}</a></li>
+						{% endfor %}
+					</ul>
+				</nav>
+				<div id="drawer-region" class="small">
+					<p class="center">Widgets maybe can go here.</p>
+				</div>
+			</div> <!-- close nav#navigation -->
+
+			<div id="page">
+				<div id="wrapper">
+					
+					<header id="site-header">
+						<div class="grid">
+							<div id="header-contents">
+								<div class="g2">
+									<a id="drawer-link" href="#drawer"><i class="fa fa-bars"></i> <span class="text">Menu</span></a>
+								</div>
+								<div class="g8 text-center">
+									<div id="site-title"><a href="{{ base_url }}">{{ site_title }}</a></div>
+								</div>
+								<div class="g2 right-always">
+									<a id="search-link" href="#search"><i class="fa fa-search"></i> <span class="text">Search</span></a>
+								</div>
+							</div>
+						</div>
+					</header>
+					
+					<div id="content-body">
+
+						<!-- Break between header.php and pages -->
+
+						<div class="grid">
+							<div class="g12">
+								
+							{% if is_front_page %} <!-- Front page lists all blog posts -->
+
+								<h1 class="listing">Recent Posts</h1>
+								{% if paged_pages|length > 0 %}
+								<section id="posts">
+								{% for page in paged_pages %}
+									<article class="entry listing">
+										{% if page.featured_image %}
+										<div class="featured-image">
+											<img src="{{ page.featured_image }}" alt="">
+										</div>
+										{% endif %}
+										<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
+										
+										<p class="excerpt">{{ page.excerpt }}</p>
+
+										<p><a href="{{ page.url }}" class="more-link">Keep reading <i class="fa fa-caret-right"></i></a></p>
+										
+										<div class="links">
+											<ul class="link-list">
+												<li><a href="{{ page.url }}" title="Permalink" class="perma-link"><i class="fa fa-link"></i> <span class="text">Permalink</span></a></li>
+												<li><a href="{{ page.url }}#comments" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
+											</ul>
+										</div>
+
+										<div class="details">{{ page.date_formatted }}</div>
+									</article>
+								{% endfor %}
+								</section>
+								{% if total_pages > 0 %}
+								<div class="directional-links">
+									{{ pagination_links }}
+								</div>
+								{% endif %}
+								{% else %}
+								<p>There are no blog posts right now.</p>
+								{% endif %}
+
+							{% else %} <!-- Single page shows individual blog post -->
+
+								<article class="entry single">
+									{% if meta.featured_image %}
+									<div class="featured-image">
+										<img src="{{ meta.featured_image }}" alt="">
+									</div>
+									{% endif %}
+									{% if meta.title %}<h1>{{ meta.title }}</h1>{% endif %}
+									<p class="attn">{{ meta.description }}</p>
+									{{ content }}
+
+									<div class="links">
+										<ul class="link-list">
+											<li><a href="{{ page.url }}" title="Permalink" class="perma-link"><i class="fa fa-link"></i> <span class="text">Permalink</span></a></li>
+											<li><a href="{{ page.url }}#comments" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
+										</ul>
+									</div>
+
+									{% if meta.date_formatted %}
+									<div class="details">{{ meta.date_formatted }}</div>
+									{% endif %}
+									
+									{% if page.social_links %}
+									<div class="sharing">
+										<h3 class="sharing-heading">Share</h3>
+										{{ page.social_links }}
+									</div>
+									{% endif %}
+								</article>
+
+								<p><a href="{{ base_url }}" class="home-link"><i class="fa fa-caret-left"></i> Home</a></p>
+
+							{% endif %}
+							</div> <!-- close .g12 -->
+						</div> <!-- close .grid -->
+					</div> <!-- close #content-body -->
+
+				</div> <!-- close #wrapper -->
+				
+				<footer>
+					<div class="grid">
+						<div class="g6 widget">
+							<h2>About</h2>
+							<div class="lined">
+								<p>Tastelicio.us is a delicious page about food, cooking, entertaining, and living life well.</p>
+								<p><a href="{{ base_url }}/about" class="more">Read more...</a></p>
+							</div>
+						</div>
+						<div class="g6 widget">
+							<h2>Recent Posts</h2>
+							<ul class="lined">
+								{% for post in recent_posts %}
+								<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+						<div class="g12 center">
+							<div class="lined">
+								<p>&copy; 2014 All rights reserved. | <a href="index.php">Home</a> | <a href="#top">Top</a></p>
+							</div>
+						</div>
+					</div>
+				</footer>
+
+				<!-- Site Search -->
+				<div id="search-overlay">
+					<a id="search-close" href="#close">
+						<svg version="1.1" id="close-x" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+							<line fill="none" x1="0" y1="0" x2="40" y2="40" style="stroke:#999;stroke-width:1px"/>
+							<line fill="none" x1="0" y1="40" x2="40" y2="0" style="stroke:#999;stroke-width:1px"/>
+						</svg>
+					</a>
+					<form action="search.php" method="get">
+						<p><input type="text" name="q" class="querybox" placeholder="Search..." autocomplete="on" /></p>
+						<p class="input-help">Type and hit return to search.</p>
+					</form>
+				</div>
+
+				<!-- Page Overlay (Blackout) -->
+				<div id="page-overlay"></div>
+				
+			</div> <!-- close #page -->
+		</div> <!-- close #control -->
+	</body>
+</html>

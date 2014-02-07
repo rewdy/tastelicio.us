@@ -7,10 +7,9 @@
 <xsl:include href="../utilities/sharing.xsl" />
 
 <xsl:template match="/data">
-	<section id="page_single" class="content_single">
-		<xsl:apply-templates select="page-single/entry" />
-	</section>
-	<div class="back_holder"><a href="{$root}">Home</a></div>
+	<xsl:apply-templates select="page-single/entry" />
+
+	<p><a href="{$root}" class="home-link"><i class="fa fa-caret-left"></i> Home</a></p>
 </xsl:template>
 
 <xsl:template match="data" mode="page-title">
@@ -18,26 +17,14 @@
 </xsl:template>
 
 <xsl:template match="page-single/entry">
-	<article class="entry single page">
-		<header>
-			<h2><xsl:value-of select="page-title" /></h2>
-		</header>
-		<xsl:apply-templates select="attached-images" />	
+	<article class="page">
+		
+		<xsl:apply-templates select="attached-images" />
+
+		<h1><xsl:value-of select="page-title" /></h1>
+
 		<xsl:copy-of select="page-content/node()" />
 				
-		<footer>
-			<div class="sharing">
-				<xsl:call-template name="twitter-button">
-					<xsl:with-param name="data-count" select="'horizontal'" />
-					<xsl:with-param name="data-text" select="entry-title" />
-				</xsl:call-template>
-				<xsl:call-template name="facebook-like">
-					<xsl:with-param name="url-to-like" select="$current-url" />
-					<xsl:with-param name="font" select="'arial'" />
-					<xsl:with-param name="width" select="275" />
-				</xsl:call-template>
-			</div>
-		</footer>
 	</article>
 </xsl:template>
 

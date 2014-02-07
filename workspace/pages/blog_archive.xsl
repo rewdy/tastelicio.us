@@ -4,59 +4,62 @@
 
 <xsl:include href="../utilities/master.xsl" />
 <xsl:include href="../utilities/pagination.xsl" />
-<xsl:include href="../utilities/attached-images.xsl" />
+
 <xsl:include href="../utilities/truncate.xsl" />
 
 <xsl:template match="/data">
-	<section id="entry_listing">
-		<h2>Archive for 
-			<xsl:call-template name="month-to-text">
-				<xsl:with-param name="month" select="$month" />
-			</xsl:call-template> 
-			<xsl:value-of select="$year"/>
-		</h2>
-		<xsl:apply-templates select="archive-entries/entry" />
-		<div id="pages">
-			<xsl:call-template name="pagination">
-				<xsl:with-param name="pagination" select="archive-entries/pagination" />
-				<xsl:with-param name="pagination-url" select="concat($root, '/blog/$')" />
-			</xsl:call-template>
-		</div>
-	</section>
-	<div class="back_holder"><a href="{$root}">Back to blog</a></div>
+	<h1 class="listing">Archive for 
+		<xsl:call-template name="month-to-text">
+			<xsl:with-param name="month" select="$month" />
+		</xsl:call-template> 
+		<xsl:value-of select="$year"/>
+	</h1>
+	<xsl:apply-templates select="archive-entries/entry" />
+	<div id="pages">
+		<xsl:call-template name="pagination">
+			<xsl:with-param name="pagination" select="archive-entries/pagination" />
+			<xsl:with-param name="pagination-url" select="concat($root, '/blog/$')" />
+		</xsl:call-template>
+	</div>
+
+	<p><a href="{$root}" class="home-link"><i class="fa fa-caret-left"></i> Home</a></p>
 </xsl:template>
 
 <xsl:template match="archive-entries/entry">
-	<article class="entry listed clearfix">
-		<div class="grid_3 alpha">
-			<xsl:choose>
-				<xsl:when test="attached-images/item[1]">
-					<xsl:apply-templates select="attached-images/item[1]" />
-				</xsl:when>
-				<xsl:otherwise>
-					<div class="placeholder" style="height:145px;"></div>
-				</xsl:otherwise>
-			</xsl:choose>
+	<article class="entry listing">
+	
+	<div class="row clearfix">
+		<div class="g3 images">
+			<xsl:apply-templates select="attached-images/item[1]" />
 		</div>
-		<div class="grid_6 omega">
-			<h3><a href="{$root}/blog/view/{entry-title/@handle}" rel="permalink" title="Read article..."><xsl:value-of select="entry-title" /></a></h3>
-			<div class="date">
-				<xsl:call-template name="format-date">
-					<xsl:with-param name="date" select="publish-date"/>
-					<xsl:with-param name="format" select="'M x, Y'"/>
-				</xsl:call-template>
-			</div>
-			<p><xsl:copy-of select="entry-summary/node()" /></p>
-			
-			<div class="entry_links">
-				<a href="{$root}/blog/view/{entry-title/@handle}" rel="permalink" class="button">Read Entry</a>
-			</div>
-		</div>
-	</article>
-</xsl:template>
 
+		<div class="g9 content">
+			<h2><a href="{$root}/blog/view/{entry-title/@handle}" rel="permalink" title="Read article..."><xsl:value-of select="entry-title" /></a></h2>
+			
+			<p class="attn summary"><xsl:value-of select="entry-summary"/></p>
+
+			<p><a href="{$root}/blog/view/{entry-title/@handle}" class="more-link">Keep reading <i class="fa fa-caret-right"></i></a></p>
+		</div>
+	</div>
+	<div class="links">
+		<ul class="link-list">
+			<li><a href="{$root}/blog/view/{entry-title/@handle}" title="Permalink" class="perma-link"><i class="fa fa-link"></i> <span class="text">Permalink</span></a></li>
+			<li><a href="{$root}/blog/view/{entry-title/@handle}#comments" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
+		</ul>
+	</div>
+
+	<div class="details">
+		<xsl:call-template name="format-date">
+			<xsl:with-param name="date" select="publish-date"/>
+			<xsl:with-param name="format" select="'M x, Y'"/>
+		</xsl:call-template>
+	</div>
+
+</article>
+</xsl:template>
 
 <xsl:template match="attached-images/item">
 	<img src="{$root}/image/2/210/145/5{image/@path}/{image/filename}" alt="{caption}" title="{caption}" />
 </xsl:template>
+
 </xsl:stylesheet>

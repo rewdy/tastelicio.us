@@ -1,0 +1,124 @@
+/* Forms */
+
+// basic form item container
+.form-item,
+fieldset {
+	margin:0 0 1em 0;
+}
+fieldset fieldset {
+	margin:0;
+}
+// standard labels, legends for checkbox and radio arrays
+.form-item label,
+.form-item fieldset legend,
+fieldset.select legend {
+	font-weight:600;
+	text-transform:uppercase;
+}
+// grouped content for checkboxes
+.form-item fieldset,
+fieldset.select {
+	column-count: 3;
+	column-gap:2%;
+}
+fieldset.select label,
+.form-item fieldset label {
+	display:inline;
+	font-weight:normal;
+	cursor:pointer;
+	margin-right:1em;
+}
+
+// standard input help
+.form-item .form-help {
+	font-size:0.9em;
+	font-style:italic;
+}
+
+// inputs, textareas, selects, buttons, etc.!
+input[type=text],
+input[type=password],
+textarea,
+select {
+	padding:0.4em;
+	max-width:100%;
+	border:1px solid #ddd;
+	font-size:1em;
+	font-family: @font;
+	-webkit-box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.1);
+	-moz-box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.1);
+	-ms-box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.1);
+	box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.1);
+	outline: none;
+	.border-box;
+	&:focus {
+		border-color: #666;
+	}
+}
+input[type=text],
+input[type=password] {
+	width: 24em;
+}
+button,
+a.button,
+input[type=submit],
+input[type=button],
+input[type=reset] {
+	display:inline-block;
+	padding:0.4em 0.8em;
+	border:0;
+	background:@accent;
+	color:#fff;
+	font-size:1em;
+	font-weight:500;
+	font-family:@font;
+	line-height:@lineheight;
+	text-transform:uppercase;
+	cursor: pointer;
+	-webkit-box-shadow:inset 0 0.1em 0.5em rgba(0,0,0,0.1);
+	-moz-box-shadow:inset 0 0.1em 0.5em rgba(0,0,0,0.1);
+	-ms-box-shadow:inset 0 0.1em 0.5em rgba(0,0,0,0.1);
+	box-shadow:inset 0 0.1em 0.5em rgba(0,0,0,0.1);
+	.transition(0.2s);
+	&:hover {
+		background:lighten(@accent, 5%);
+	}
+	&:active,
+	&:focus {
+		background:darken(@accent, 5%);
+		-webkit-box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.2);
+		-moz-box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.2);
+		-ms-box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.2);
+		box-shadow:inset 0 0.1em 1em rgba(0,0,0,0.2);
+	}
+}
+
+// some classes for variations
+div.submit {
+	padding-top:1em;
+	border-top:1px solid #ddd;
+}
+input.narrow {
+	width:10em;
+}
+input.long {
+	width:30em;
+}
+input.full {
+	width:100%;
+}
+/* media specifics */
+@media only screen and (max-width: @breakpoint) {
+	input[type=text],
+	input[type=password],
+	input.long,
+	textarea,
+	select {
+		width:100%;
+	}
+	input.narrow {
+		width:50%;
+	}
+}
+
+

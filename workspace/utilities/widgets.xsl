@@ -4,17 +4,14 @@
 <xsl:template name="widgets">
 	<xsl:apply-templates select="/data/widget-recipe-recent" />
 	<xsl:apply-templates select="/data/widget-entry-archive" />
-	<xsl:call-template name="search" />
 </xsl:template>
 
 <xsl:template match="/data/widget-entry-archive">
-	<section class="grid_4 widget">
-		<h4>Archives</h4>
-		<div class="liner">
-			<ul>
-				<xsl:apply-templates select="year/month" />
-			</ul>
-		</div>
+	<section class="g6 widget">
+		<h2>Archives</h2>
+		<ul class="lined">
+			<xsl:apply-templates select="year/month" />
+		</ul>
 	</section>
 </xsl:template>
 <xsl:template match="/data/widget-entry-archive/year/month">
@@ -29,13 +26,11 @@
 </xsl:template>
 
 <xsl:template match="/data/widget-recipe-recent">
-	<section class="grid_4 widget">
-		<h4>Recent Recipes</h4>
-		<div class="liner">
-			<ul>
-				<xsl:apply-templates select="entry" />
-			</ul>
-		</div>
+	<section class="g6 widget">
+		<h2>Recent Recipes</h2>
+		<ul class="lined">
+			<xsl:apply-templates select="entry" />
+		</ul>
 	</section>
 </xsl:template>
 <xsl:template match="/data/widget-recipe-recent/entry">
@@ -44,25 +39,6 @@
 			<xsl:value-of select="title" />
 		</a>
 	</li>
-</xsl:template>
-
-<xsl:template name="search">
-	<section id="search" class="grid_4 widget">
-		<h4>Search</h4>
-		<form id="searchform" action="{$root}/page/search/" method="get">
-			<p>Take a peek around...</p>
-			<div class="form_item">
-				<div class="input_holder">
-					<input type="text" name="q" />
-				</div>
-			</div>
-			<div class="form_item">
-				<div class="input_holder">
-					<input type="submit" value="Search..." />
-				</div>
-			</div>
-		</form>
-	</section>
 </xsl:template>
 
 </xsl:stylesheet>

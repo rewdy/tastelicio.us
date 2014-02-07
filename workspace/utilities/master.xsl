@@ -7,6 +7,7 @@
 <xsl:include href="date-time.xsl" />
 <xsl:include href="month-to-text.xsl" />
 <xsl:include href="navigation.xsl" />
+<xsl:include href="search.xsl" />
 <xsl:include href="widgets.xsl" />
 
 <xsl:template match="/">
@@ -16,54 +17,102 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
 		<title><xsl:apply-templates select="data" mode="page-title"/></title>
+	
+		<xsl:comment>Stylesheets</xsl:comment>
+		<link href="{$workspace}/theme/lib/fonts/font-awesome-4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel="stylesheet" type="text/css" />
 		
-		<xsl:comment>Framework Styles</xsl:comment>
-		<link href="{$workspace}/css/reset.css" rel="stylesheet" type="text/css" />
-		<link href="{$workspace}/css/960gs-custom.css" rel="stylesheet" type="text/css" />
-		<link href="{$workspace}/css/text.css" rel="stylesheet" type="text/css" />
+		<link href="{$workspace}/theme/css/style.css" rel="stylesheet" type="text/css" />
 		
-		<xsl:comment>Custom Styles</xsl:comment>
-		<link href="{$workspace}/css/custom.css" rel="stylesheet" type="text/css" />
-		<link href="http://fonts.googleapis.com/css?family=Old+Standard+TT:regular,italic,bold" rel="stylesheet" type="text/css" />
+		<xsl:comment>Javascript</xsl:comment>
+		<script type="text/javascript" src="{$workspace}/theme/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="{$workspace}/theme/js/jquery.cycle.min.js"></script>
+		<xsl:if test="$current-page = 'recipes'">
+		<script type="text/javascript" src="{$workspace}/theme/js/masonry.min.js"></script>
+		</xsl:if>
+		<script type="text/javascript" src="{$workspace}/theme/js/cody-script.js"></script>
+
+		<xsl:comment>IE Helper</xsl:comment>
+		<xsl:comment><![CDATA[[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]]]></xsl:comment>
 		
-		<xsl:comment>Nifty Scripty</xsl:comment>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-		<script type="text/javascript" src="{$workspace}/js/jquery.cycle.min.js"></script>
-		<script type="text/javascript" src="{$workspace}/js/global.js"></script>
-		
-<xsl:comment><![CDATA[[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]]]></xsl:comment>
+		<xsl:comment>Meta</xsl:comment>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5" />
 
 	</head>
 	
 	<body>
-		<div id="top">
-			<div class="container_12 clearfix">
-				<header id="site_header" class="grid_3">
-					<div class="stationary">
-						<hgroup>
-							<h1><a href="{$root}" title="Go Home"><xsl:value-of select="$website-name" rel="home" /></a></h1>
-							<h2>Do somethin' #nom!</h2>
-						</hgroup>
-						<nav id="site">
-							<xsl:apply-templates select="data/navigation" />
-							<xsl:apply-templates select="data/page-nav" />
-						</nav>
+
+		<div id="control">
+			
+			<div id="drawer">
+				<nav id="site">
+					<xsl:apply-templates select="data/navigation" />
+					<xsl:apply-templates select="data/page-nav" />
+				</nav>
+				<div id="drawer-region" class="small">
+					<p class="center">Widgets maybe can go here.</p>
+				</div>
+			</div> <xsl:comment>close nav#navigation</xsl:comment>
+
+			<div id="page">
+				<div id="wrapper">
+					
+					<header id="site-header">
+						<div class="grid">
+							<div id="header-contents">
+								<div class="g2">
+									<a id="drawer-link" href="#drawer"><i class="fa fa-bars"></i> <span class="text">Menu</span></a>
+								</div>
+								<div class="g8 text-center">
+									<div id="site-title"><a href="{$root}" title="Go Home"><xsl:value-of select="$website-name" rel="home" /></a></div>
+								</div>
+								<div class="g2 right-always">
+									<a id="search-link" href="#search"><i class="fa fa-search"></i> <span class="text">Search</span></a>
+								</div>
+							</div>
+						</div>
+					</header>
+					
+					<div id="content-body">
+
+						<div class="grid">
+							<div class="g12">
+								
+								<xsl:apply-templates />
+							
+							</div> <xsl:comment>close .g12</xsl:comment>
+						</div> <xsl:comment>close .grid</xsl:comment>
+					</div> <xsl:comment>close #content-body</xsl:comment>
+
+				</div> <xsl:comment>close #wrapper</xsl:comment>
+				
+				<footer>
+					<div class="grid">
+						
+						<xsl:call-template name="widgets" />
+
+						<div class="g12 center">
+							<div class="lined">
+								<p>&#169; 2014 All rights reserved. | <a href="index.php">Home</a> | <a href="#top">Top</a></p>
+							</div>
+						</div>
 					</div>
-					<br/>
-				</header>
-				<section id="content" class="grid_9">
-					<xsl:apply-templates />
-				</section>
-			</div>
-		</div>
-		<footer id="site_footer" class="clearfix">
-			<div class="container_12">
-				<xsl:call-template name="widgets" />
-			</div>
-		</footer>
+				</footer>
+
+				<xsl:comment>Site Search</xsl:comment>
+				<xsl:call-template name="search" />
+
+				<xsl:comment>Page Overlay (Blackout)</xsl:comment>
+				<div id="page-overlay"></div>
+				
+			</div> <xsl:comment>close #page</xsl:comment>
+		</div> <xsl:comment>close #control</xsl:comment>
+
 	</body>
 	<script type="text/javascript">
 	var _gaq = _gaq || [];

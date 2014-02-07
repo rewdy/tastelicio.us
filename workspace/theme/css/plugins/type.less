@@ -1,0 +1,105 @@
+/* Type + Tags */
+
+body {
+	font-family:@font;
+	font-size:@size;
+	line-height:@lineheight;
+	-webkit-font-smoothing:antialiased;
+	-moz-font-smoothing:antialiased;
+	font-smoothing:antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin:0.2rem 0 0.667rem 0;
+	line-height:unit(@fontScale*0.93, em);
+	font-family:@hfont;
+	font-weight:700;
+	a {
+		color:@color;
+		text-decoration:none;
+		&:hover {
+			text-decoration:underline;
+		}
+	}
+}
+
+h1 {
+	font-size:2em;
+	margin-bottom:0.5em;
+}
+h2 {
+	font-size:1.5em;
+}
+h3 {
+
+}
+
+
+p, ul, ol, blockquote, pre, table {
+	margin:0 0 @lineheight 0;
+}
+
+ul, ol {
+	li {
+		margin-left:unit(@fontScale*2, em);	
+	}
+}
+
+table {
+	min-width:40%;
+	border-collapse:collapse;
+	border:2px solid @linecolor;
+	&.full {
+		width:100%;
+	}
+	@media only screen and (max-width:@breakpoint) {
+		width:100%;
+	}
+}
+table tr th,
+table tr td {
+	padding:0.5rem;
+	margin:0;
+}
+table tr:nth-child(odd) td {
+	background-color:@screen;
+}
+table tr th {
+	text-align:left;
+	font-size:@small;
+	font-weight:700;
+	text-transform:uppercase;
+}
+
+blockquote {
+	padding:0.5em 0.8em;
+	font-size:1.2em;
+	font-style:italic;
+	line-height:@lineheight;
+	background-color: @screen;
+}
+code, pre {
+	font-size:1em;
+	padding:0.2em;
+	background-color: @screen;
+}
+pre {
+	padding:0.5em 0.8em;
+	white-space: pre-wrap;
+}
+
+hr {
+	margin:1em 0;
+	border-top:1px solid @linecolor;
+}
+
+a {
+	color: @linkcolor;
+	.transition;
+	&:hover {
+		color:@linkhover;
+	}
+}
+
+img {
+	background:@screen url(../img/loading.gif) no-repeat center center;
+}
