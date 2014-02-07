@@ -11,13 +11,13 @@
 
 		###### SYMPHONY ######
 		'symphony' => array(
-			'pagination_maximum_rows' => '20',
-            'association_maximum_rows' => '5',
+			'pagination_maximum_rows' => '10',
 			'lang' => 'en',
-			'pages_table_nest_children' => 'no',
-			'version' => VERSION,
-			'cookie_prefix' => 'sym-',
+			'version' => '2.3.6',
+			'pages_table_nest_children' => 'yes',
 			'session_gc_divisor' => '10',
+			'cookie_prefix' => 'sym-',
+			'association_maximum_rows' => '5',
 		),
 		########
 
@@ -30,8 +30,27 @@
 		########
 
 
+		###### GENERAL ######
+		'general' => array(
+			'sitename' => 'Tastelicio.us',
+			'useragent' => 'Symphony/2.3.6',
+		),
+		########
+
+
+		###### IMAGE ######
+		'image' => array(
+			'cache' => '1',
+			'quality' => '90',
+			'disable_regular_rules' => 'no',
+			'disable_upscaling' => 'no',
+		),
+		########
+
+
 		###### DATABASE ######
 		'database' => array(
+			'query_caching' => 'default',
 			'host' => 'localhost',
 			'port' => '3306',
 			'user' => null,
@@ -44,14 +63,24 @@
 
 		###### PUBLIC ######
 		'public' => array(
-			'display_event_xml_in_source' => 'no',
+			'display_event_xml_in_source' => 'yes',
 		),
 		########
 
 
-		###### GENERAL ######
-		'general' => array(
-			'sitename' => 'Symphony CMS',
+		###### REGION ######
+		'region' => array(
+			'time_format' => 'g:i a',
+			'date_format' => 'd F Y',
+			'datetime_separator' => ' ',
+			'timezone' => 'America/Chicago',
+		),
+		########
+
+
+		###### MAINTENANCE_MODE ######
+		'maintenance_mode' => array(
+			'enabled' => 'no',
 		),
 		########
 
@@ -70,20 +99,18 @@
 		########
 
 
-		###### REGION ######
-		'region' => array(
-			'time_format' => 'g:i a',
-			'date_format' => 'm/d/Y',
-			'datetime_separator' => ' ',
-			'timezone' => null
-		),
-		########
-
-
-		###### IMAGE ######
-		'image' => array(
-			'cache' => '1',
-			'quality' => '90',
+		###### SORTING ######
+		'sorting' => array(
+			'section_weblog-entries_sortby' => '4',
+			'section_weblog-entries_order' => 'desc',
+			'section_images_sortby' => null,
+			'section_images_order' => 'asc',
+			'section_comments_sortby' => null,
+			'section_comments_order' => 'asc',
+			'section_recipes_sortby' => null,
+			'section_recipes_order' => 'asc',
+			'section_pages_sortby' => null,
+			'section_pages_order' => 'asc',
 		),
 		########
 	);
