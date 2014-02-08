@@ -9,7 +9,7 @@
 
 <xsl:template match="/data">
 
-	<h2>Search Results</h2>
+	<h1 class="listing">Search Results</h1>
 	
 	<script>
 		(function() {
@@ -23,10 +23,10 @@
 			s.parentNode.insertBefore(gcse, s);
 		})();
 	</script>
-	<gcse:searchresults-only></gcse:searchresults-only>
+	<gcse:searchresults-only xmlns:gcse="http://www.w3.org/TR/html4/"></gcse:searchresults-only>
 
 	<div class="back_holder"><a href="{$root}">Home</a></div>
-	
+
 </xsl:template>
 
 </xsl:stylesheet>
