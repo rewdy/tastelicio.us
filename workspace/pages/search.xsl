@@ -23,7 +23,7 @@
 			s.parentNode.insertBefore(gcse, s);
 		})();
 	</script>
-	<gcse:searchresults-only xmlns:gcse="http://www.w3.org/TR/html4/"></gcse:searchresults-only>
+	<gcse:search xmlns:gcse="http://www.w3.org/TR/html4/"></gcse:search>
 
 	<div class="back_holder"><a href="{$root}">Home</a></div>
 
