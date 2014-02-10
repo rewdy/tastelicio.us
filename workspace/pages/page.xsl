@@ -9,7 +9,7 @@
 <xsl:template match="/data">
 	<xsl:apply-templates select="page-single/entry" />
 
-	<p><a href="{$root}" class="home-link"><i class="fa fa-caret-left"></i> Home</a></p>
+	<p><a href="{$root}" class="home-link"><i class="fa fa-home"></i> Home</a></p>
 </xsl:template>
 
 <xsl:template match="data" mode="page-title">
@@ -24,7 +24,11 @@
 		<h1><xsl:value-of select="page-title" /></h1>
 
 		<xsl:copy-of select="page-content/node()" />
-				
+		
+		<xsl:call-template name="sharing">
+			<xsl:with-param name="title" select="page-title"/>
+		</xsl:call-template>
+
 	</article>
 </xsl:template>
 

@@ -111,7 +111,7 @@ article .links{float:right;color:#bbb;font-weight:400;font-size:.8em;line-height
 article .links ul.link-list li a .text{display:none}
 article div.feature-image{background-color:#f2f2f2;margin-bottom:1.5rem}article div.feature-image img{display:block}
 article .caption{padding:.5em;text-align:right;font-family:'Source Sans Pro',sans-serif;font-size:.8em;font-style:italic}
-div.sharing{margin:1.5rem 0 0 0;padding-top:1em;border-top:1px solid #e6e6e6;background:transparent;background:-moz-linear-gradient(top, #f2f2f2 0, #fff 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f2f2), color-stop(100%, #fff));background:-webkit-linear-gradient(top, #f2f2f2 0, #fff 100%);background:-o-linear-gradient(top, #f2f2f2 0, #fff 100%);background:-ms-linear-gradient(top, #f2f2f2 0, #fff 100%);background:linear-gradient(to bottom, #f2f2f2 0, #fff 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2f2f2', endColorstr='#ffffffff', GradientType=0)}div.sharing .sharing-heading{margin:-1em 0 .5em 0;text-align:center;color:#bbb;font-size:.8em;font-family:'Source Sans Pro',sans-serif;font-weight:700;text-transform:uppercase}
+div.sharing{margin:1.5rem 0 0 0;padding-top:1em;border-top:1px solid #e6e6e6;background:transparent;background:-moz-linear-gradient(top, #f2f2f2 0, #fff 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f2f2), color-stop(100%, #fff));background:-webkit-linear-gradient(top, #f2f2f2 0, #fff 100%);background:-o-linear-gradient(top, #f2f2f2 0, #fff 100%);background:-ms-linear-gradient(top, #f2f2f2 0, #fff 100%);background:linear-gradient(to bottom, #f2f2f2 0, #fff 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2f2f2', endColorstr='#ffffffff', GradientType=0)}div.sharing .sharing-heading{margin:-0.5em 0 .5em 0;text-align:center;color:#bbb;font-size:.8em;font-family:'Source Sans Pro',sans-serif;font-weight:700;text-transform:uppercase}
 ul.sharing-list{margin:0;padding:0;font-size:.8em;text-align:center}ul.sharing-list li{margin:0;padding:0;list-style:none;display:inline}ul.sharing-list li a{display:inline-block;width:1em;height:1em;padding:.75em .75em;margin:0 .25em;text-align:center;color:#fff;line-height:1em;background-color:#61b461}ul.sharing-list li a .text{display:none}
 ul.sharing-list li a:hover{-webkit-box-shadow:inset 0 0 1em rgba(0,0,0,0.4);-moz-box-shadow:inset 0 0 1em rgba(0,0,0,0.4);-ms-box-shadow:inset 0 0 1em rgba(0,0,0,0.4);box-shadow:inset 0 0 1em rgba(0,0,0,0.4)}
 ul.sharing-list li a.facebook{background-color:#4e69a2}
@@ -134,6 +134,19 @@ footer a{color:#888}
 #search-overlay form{margin:0 auto;padding:3em 1em;max-width:900px}#search-overlay form input.querybox{padding:0 0 10px 0;width:100%;border-width:0;border-bottom:1px solid #ddd;font-size:3.5em;font-weight:700;color:#444;background-color:transparent;box-shadow:none}
 #search-overlay form .input-help{font-style:italic}
 #search-overlay ::-webkit-input-placeholder,#search-overlay :-moz-placeholder,#search-overlay ::-moz-placeholder,#search-overlay :-ms-input-placeholder{color:#ccc}
+#content-body .cse .gsc-control-cse,#content-body .gsc-control-cse{padding:0}
+#content-body .gsc-control-cse{margin-bottom:1.5rem}
+#content-body .gsc-result-info{background-color:#f2f2f2}
+#content-body .gsc-above-wrapper-area{padding:0;border:0 none}
+#content-body table{border:0 none}
+#content-body table tr td,#content-body table tr:nth-child(odd) td{margin:0;padding:0;background-color:transparent}
+#content-body table.gsc-table-result,#content-body table.gsc-above-wrapper-area-container{margin-bottom:0}
+#content-body .gcsc-branding-img-noclear img{max-width:none;width:auto;height:auto;background:none transparent;position:relative;top:3px}
+#content-body .gcsc-branding,#content-body .gsc-table-result,#content-body .gsc-thumbnail-inside,#content-body .gsc-url-top{padding-left:0;padding-right:0;padding:0}
+#content-body .gsc-results{padding-bottom:0;width:auto}
+#content-body .gsc-results .gsc-cursor-box{margin:0}
+#content-body .gsc-cursor-current-page{background-color:#f2f2f2}
+#content-body .gsc-cursor-page{padding:4px 8px;font-size:16px}
 .attn{font-size:1.2em;font-weight:400;font-style:italic;color:#bbb}
 .right{text-align:right}@media only screen and (max-width:640px){.right{text-align:left}}
 .right-always{text-align:right}

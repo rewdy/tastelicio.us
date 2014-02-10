@@ -9,7 +9,11 @@
 
 <xsl:template match="/data">
 
-	<h1 class="listing">Search Results</h1>
+	<h1 class="listing">Search Results 
+		<xsl:if test="$url-q">
+			for <xsl:value-of select="$url-q" />
+		</xsl:if>
+	</h1>
 	
 	<script>
 		(function() {
@@ -23,9 +27,9 @@
 			s.parentNode.insertBefore(gcse, s);
 		})();
 	</script>
-	<gcse:search xmlns:gcse="http://www.w3.org/TR/html4/"></gcse:search>
+	<gcse:searchresults-only xmlns:gcse="http://www.w3.org/TR/html4/"></gcse:searchresults-only>
 
-	<div class="back_holder"><a href="{$root}">Home</a></div>
+	<p><a href="{$root}" class="home-link"><i class="fa fa-home"></i> Home</a></p>
 
 </xsl:template>
 

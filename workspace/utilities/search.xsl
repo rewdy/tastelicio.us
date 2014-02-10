@@ -10,7 +10,7 @@
 				<line fill="none" x1="0" y1="40" x2="40" y2="0" style="stroke:#999;stroke-width:1px"/>
 			</svg>
 		</a>
-		<form id="searchform" action="{$root}/page/search/" method="get">
+		<form id="searchform" action="{$root}/search/" method="get">
 			<input type="text" name="q" class="querybox" placeholder="Search..." autocomplete="on" />
 			<p class="input-help">Type and hit return to search.</p>
 		</form>
