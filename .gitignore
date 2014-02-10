@@ -1,5 +1,6 @@
 .DS*
 ._*
+.htaccess
 manifest/*
 manifest/config.php
 workspace/img/*
