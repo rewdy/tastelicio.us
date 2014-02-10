@@ -381,7 +381,7 @@ div.sharing {
 	background: transparent; /* Old browsers */
 	.linear-gradient(#f2f2f2, #fff);
 	.sharing-heading {
-		margin:-1em 0 0.5em 0;
+		margin:-0.5em 0 0.5em 0;
 		text-align:center;
 		color:@light;
 		font-size:@small;
@@ -570,6 +570,67 @@ footer {
 	::-moz-placeholder,
 	:-ms-input-placeholder {  
 	   color: #ccc;  
+	}
+}
+
+// search results
+#content-body{
+	.cse .gsc-control-cse,
+	.gsc-control-cse {
+		padding:0;
+	}
+	.gsc-control-cse {
+		margin-bottom:@lineheight;
+	}
+	.gsc-result-info {
+		background-color:@screen;
+	}
+	.gsc-above-wrapper-area {
+		padding:0;
+		border:0 none;
+	}
+	table {
+		border:0 none;
+	}
+	table tr td,
+	table tr:nth-child(odd) td {
+		margin:0;
+		padding:0;
+		background-color:transparent;
+	}
+	table.gsc-table-result,
+	table.gsc-above-wrapper-area-container {
+		margin-bottom:0;
+	}
+	.gcsc-branding-img-noclear img {
+		max-width:none;
+		width:auto;
+		height:auto;
+		background:none transparent;
+		position:relative;
+		top:3px;
+	}
+	.gcsc-branding,
+	.gsc-table-result, 
+	.gsc-thumbnail-inside, 
+	.gsc-url-top {
+		padding-left:0;
+		padding-right:0;
+		padding:0;
+	}
+	.gsc-results {
+		padding-bottom:0;
+		width:auto;
+	}
+	.gsc-results .gsc-cursor-box {
+		margin:0;
+	}
+	.gsc-cursor-current-page {
+		background-color:@screen;
+	}
+	.gsc-cursor-page {
+		padding:4px 8px;
+		font-size:16px;
 	}
 }
 

@@ -13,7 +13,7 @@
 
 	<xsl:apply-templates select="entry-single/entry" />
 
-	<p><a href="{$root}" class="home-link"><i class="fa fa-caret-left"></i> Home</a></p>
+	<p><a href="{$root}" class="home-link"><i class="fa fa-home"></i> Home</a></p>
 
 </xsl:template>
 
