@@ -24,6 +24,14 @@
 				'entry-title',
 				'entry-summary: formatted',
 				'entry-full-text: formatted',
+				'recipe: title',
+				'recipe: intro: formatted',
+				'recipe: ingredients: formatted',
+				'recipe: method: formatted',
+				'recipe: yield',
+				'recipe: prep-time',
+				'recipe: total-time',
+				'recipe: photo',
 				'attached-images: image',
 				'attached-images: alt',
 				'attached-images: caption: unformatted',
@@ -45,7 +53,7 @@
 					'website' => 'http://localhost/tastelicio.us',
 					'email' => 'andrew@rewdy.com'),
 				'version' => 'Symphony 2.3.6',
-				'release-date' => '2014-02-07T18:14:23+00:00'
+				'release-date' => '2014-02-10T17:40:59+00:00'
 			);
 		}
 

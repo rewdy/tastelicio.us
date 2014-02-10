@@ -101,6 +101,7 @@ header#site-header #drawer-link:hover,header#site-header #search-link:hover{colo
 header#site-header #drawer-link .text,header#site-header #search-link .text{position:absolute;top:0;left:0;width:0;height:0;overflow:hidden}
 article{margin-bottom:2em}
 article.pin .card{padding-bottom:1em;border-bottom:1px solid #e6e6e6}
+article.recipe.embedded{background-color:#f2f2f2;padding:1em 0}
 article.recipe .feature-image{position:relative}article.recipe .feature-image .tag{position:absolute;display:block;left:-0.38rem;top:1.5em;padding:.4em .8em;background-color:#61b461;color:#fff;text-transform:uppercase;letter-spacing:.075em;-webkit-box-shadow:.25em .25em .5em rgba(0,0,0,0.3);-moz-box-shadow:.25em .25em .5em rgba(0,0,0,0.3);-ms-box-shadow:.25em .25em .5em rgba(0,0,0,0.3);box-shadow:.25em .25em .5em rgba(0,0,0,0.3)}article.recipe .feature-image .tag:after{content:" ";position:absolute;left:0;bottom:-0.4rem;display:block;width:0;height:0;overflow:hidden;border-style:solid;border-width:0 .4rem .4rem 0;border-color:transparent #387738 transparent transparent}
 article section{border-top:1px solid #e6e6e6;padding-top:1.5rem}
 article ul.attached-images-list{margin:0;padding:0}article ul.attached-images-list li{margin:0;padding:0;list-style:none}

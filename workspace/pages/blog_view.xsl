@@ -24,10 +24,10 @@
 <xsl:template match="entry-single/entry">
 
 <article class="entry">
-	
+
 	<xsl:apply-templates select="attached-images" />
 
-	<h1><a href="{$root}/blog/view/{entry-title/@handle}" rel="permalink" title="Read article..."><xsl:value-of select="entry-title" /></a></h1>
+	<h1><xsl:value-of select="entry-title" /></h1>
 	
 	<xsl:copy-of select="entry-full-text/node()" />
 		
@@ -37,7 +37,7 @@
 		<ul class="link-list">
 			<li><a href="{$root}/blog/view/{entry-title/@handle}" title="Permalink" class="perma-link"><i class="fa fa-link"></i> <span class="text">Permalink</span></a></li>
 			<xsl:if test="not(disable-comments) or disable-comments = 'No'">
-				<li><a href="#respond" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
+				<li><a href="{$root}/blog/view/{entry-title/@handle}#respond" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
 			</xsl:if>
 		</ul>
 	</div>
@@ -49,7 +49,9 @@
 		</xsl:call-template>
 	</div>
 
-	<p class="center">Sharing goes here eventually</p>
+	<xsl:call-template name="sharing">
+		<xsl:with-param name="title" select="entry-title"/>
+	</xsl:call-template>
 </article>
 
 <xsl:apply-templates select="//entry-comments" />

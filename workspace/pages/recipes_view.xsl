@@ -41,6 +41,10 @@
 		
 		<div class="details">Prep time: <xsl:value-of select="prep-time" /> | Total time: <xsl:value-of select="total-time" /></div>
 
+		<xsl:call-template name="sharing">
+			<xsl:with-param name="title" select="title"/>
+		</xsl:call-template>
+
 	</article>
 </xsl:template>
 	
