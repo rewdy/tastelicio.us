@@ -19,13 +19,14 @@ $(function(){
 	// setup search functionality
 	setupSearch();
 
-	// setupSlideshows on posts
-	setupSlideshows();
-
+	// enable the sharing stuff
 	enableSharing();
 });
 
 $(window).load(function(){
+	// setupSlideshows on posts
+	setupSlideshows();
+	
 	// setup masonryjs
 	setupMasonry();
 });
