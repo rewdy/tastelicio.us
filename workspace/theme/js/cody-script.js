@@ -22,39 +22,10 @@ $(function(){
 	// setupSlideshows on posts
 	setupSlideshows();
 
-	// Set pageTop variable for other functions to use
-	window.pageTop = $('html, body').scrollTop();
-	$(window).scroll(function(){
-		window.pageTop = $(window).scrollTop();
-	});
-
 	enableSharing();
 });
 
 $(window).load(function(){
-	// Various items come in the load section because if images aren't loaded, there will be issues in calculating offsets.
-
-	// Read line
-	$('.readline').each(function(){
-		var enabled = false;
-		var line = $(this);
-		var article = $(this).closest('article');
-		var articleTop = article.offset().top;
-		var articleBottom = articleTop + article.outerHeight();
-		var calculationPadding = 400; // this is extra space to add when calculating the percentage because people don't read at the top of their screens.
-
-		// sets the readline accordingly on an interval to keep from bogging down the scroll event
-		setInterval(function(){
-			var top = window.pageTop;
-			if (top >= articleTop && top <= articleBottom) {
-				var percentageFinished = Math.round((top - articleTop) / (articleBottom - articleTop - calculationPadding) * 100);
-				line.width(percentageFinished + '%');
-			} else {
-				line.width(0);
-			}
-		}, 50);
-	});
-
 	// setup masonryjs
 	setupMasonry();
 });

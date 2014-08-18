@@ -52,6 +52,7 @@
 	<xsl:call-template name="sharing">
 		<xsl:with-param name="title" select="entry-title"/>
 	</xsl:call-template>
+
 </article>
 
 <xsl:apply-templates select="//entry-comments" />
