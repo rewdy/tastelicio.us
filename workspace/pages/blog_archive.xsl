@@ -44,7 +44,7 @@
 	<div class="links">
 		<ul class="link-list">
 			<li><a href="{$root}/blog/view/{entry-title/@handle}" title="Permalink" class="perma-link"><i class="fa fa-link"></i> <span class="text">Permalink</span></a></li>
-			<li><a href="{$root}/blog/view/{entry-title/@handle}#comments" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
+			<li><a href="{$root}/blog/view/{entry-title/@handle}#respond" title="Leave a comment" class="comment-link"><i class="fa fa-comment"></i> <span class="text">Comments</span></a></li>
 		</ul>
 	</div>
 
