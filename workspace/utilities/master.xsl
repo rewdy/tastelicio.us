@@ -55,7 +55,7 @@
 					<xsl:apply-templates select="data/page-nav" />
 				</nav>
 				<div id="drawer-region" class="small">
-					<p class="center">Widgets maybe can go here.</p>
+					<xsl:comment>Widgets maybe can go here.</xsl:comment>
 				</div>
 			</div> <xsl:comment>close nav#navigation</xsl:comment>
 
