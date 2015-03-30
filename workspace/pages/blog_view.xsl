@@ -62,6 +62,7 @@
 		<h3 id="respond">Leave a Comment</h3>
 		<input name="MAX_FILE_SIZE" type="hidden" value="5242880" />
 		<input name="fields[for-post]" type="hidden" value="{entry-title}" />
+		<input name="xsrf" type="hidden" value="{$cookie-xsrf-token}" />
 		<div class="row clearfix">
 			<div class="g6">
 				<div class="form-item">
