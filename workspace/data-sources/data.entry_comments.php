@@ -1,77 +1,83 @@
 <?php
 
-	require_once(TOOLKIT . '/class.datasource.php');
+class datasourceentry_comments extends SectionDatasource
+{
+    public $dsParamROOTELEMENT = 'entry-comments';
+    public $dsParamORDER = 'asc';
+    public $dsParamPAGINATERESULTS = 'no';
+    public $dsParamLIMIT = '50';
+    public $dsParamSTARTPAGE = '1';
+    public $dsParamREDIRECTONEMPTY = 'no';
+    public $dsParamREDIRECTONFORBIDDEN = 'no';
+    public $dsParamREDIRECTONREQUIRED = 'no';
+    public $dsParamSORT = 'system:creation-date';
+    public $dsParamHTMLENCODE = 'no';
+    public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
 
-	Class datasourceentry_comments extends Datasource{
+    public $dsParamFILTERS = array(
+        '13' => '{$title}',
+        '35' => 'approved',
+    );
 
-		public $dsParamROOTELEMENT = 'entry-comments';
-		public $dsParamORDER = 'asc';
-		public $dsParamPAGINATERESULTS = 'no';
-		public $dsParamLIMIT = '50';
-		public $dsParamSTARTPAGE = '1';
-		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamSORT = 'system:date';
-		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
+    public $dsParamINCLUDEDELEMENTS = array(
+        'name',
+        'website',
+        'comment: formatted',
+        'date-modified'
+    );
 
-		public $dsParamFILTERS = array(
-				'13' => '{$title}',
-				'35' => 'approved',
-		);
+    public function __construct($env = null, $process_params = true)
+    {
+        parent::__construct($env, $process_params);
+        $this->_dependencies = array();
+    }
 
-		public $dsParamINCLUDEDELEMENTS = array(
-				'name',
-				'website',
-				'comment: formatted',
-				'date-modified'
-		);
+    public function about()
+    {
+        return array(
+            'name' => 'Entry Comments',
+            'author' => array(
+                'name' => 'Andrew Meyer',
+                'website' => 'http://tastelicio.us',
+                'email' => 'andrew@rewdy.com'),
+            'version' => 'Symphony 2.6.1',
+            'release-date' => '2015-03-30T20:16:12+00:00'
+        );
+    }
 
+    public function getSource()
+    {
+        return '3';
+    }
 
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
-			$this->_dependencies = array();
-		}
+    public function allowEditorToParse()
+    {
+        return true;
+    }
 
-		public function about(){
-			return array(
-				'name' => 'Entry Comments',
-				'author' => array(
-					'name' => 'Andrew Meyer',
-					'website' => 'http://tastelicio.us',
-					'email' => 'andrew@rewdy.com'),
-				'version' => 'Symphony 2.2.3',
-				'release-date' => '2012-03-02T03:18:01+00:00'
-			);
-		}
+    public function execute(array &$param_pool = null)
+    {
+        $result = new XMLElement($this->dsParamROOTELEMENT);
 
-		public function getSource(){
-			return '3';
-		}
+        try{
+            $result = parent::execute($param_pool);
+        } catch (FrontendPageNotFoundException $e) {
+            // Work around. This ensures the 404 page is displayed and
+            // is not picked up by the default catch() statement below
+            FrontendPageNotFoundExceptionHandler::render($e);
+        } catch (Exception $e) {
+            $result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
+            return $result;
+        }
 
-		public function allowEditorToParse(){
-			return true;
-		}
+        if ($this->_force_empty_result) {
+            $result = $this->emptyXMLSet();
+        }
 
-		public function grab(&$param_pool=NULL){
-			$result = new XMLElement($this->dsParamROOTELEMENT);
+        if ($this->_negate_result) {
+            $result = $this->negateXMLSet();
+        }
 
-			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
-			}
-			catch(FrontendPageNotFoundException $e){
-				// Work around. This ensures the 404 page is displayed and
-				// is not picked up by the default catch() statement below
-				FrontendPageNotFoundExceptionHandler::render($e);
-			}
-			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
-				return $result;
-			}
-
-			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
-
-			return $result;
-		}
-
-	}
+        return $result;
+    }
+}
