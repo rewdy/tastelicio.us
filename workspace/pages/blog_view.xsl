@@ -87,6 +87,9 @@
 		<div class="form-item submit">
 			<div class="input-holder"><input name="action[entry-save-comment]" type="submit" value="Submit Comment" class="button submit" /></div>
 		</div>
+		<div class="form-item accessible-hide">
+			<div class="input-holder"><input name="url" type="text" /></div>
+		</div>
 	</form>
 </xsl:if>
 

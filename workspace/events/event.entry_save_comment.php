@@ -96,7 +96,7 @@
 		}
 
 		public function load(){
-			if(isset($_POST['action']['entry-save-comment'])) return $this->__trigger();
+			if(isset($_POST['action']['entry-save-comment']) && $_POST['url'] == "") return $this->__trigger();
 		}
 
 		protected function __trigger(){
