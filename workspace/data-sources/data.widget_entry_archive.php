@@ -1,69 +1,76 @@
 <?php
 
-	require_once(TOOLKIT . '/class.datasource.php');
+class datasourcewidget_entry_archive extends SectionDatasource
+{
+    public $dsParamROOTELEMENT = 'widget-entry-archive';
+    public $dsParamORDER = 'desc';
+    public $dsParamGROUP = '4';
+    public $dsParamPAGINATERESULTS = 'no';
+    public $dsParamLIMIT = '20';
+    public $dsParamSTARTPAGE = '1';
+    public $dsParamREDIRECTONEMPTY = 'no';
+    public $dsParamREDIRECTONFORBIDDEN = 'no';
+    public $dsParamREDIRECTONREQUIRED = 'no';
+    public $dsParamSORT = 'system:creation-date';
+    public $dsParamHTMLENCODE = 'no';
+    public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 
-	Class datasourcewidget_entry_archive extends Datasource{
+    public $dsParamFILTERS = array(
+        '5' => 'published',
+    );
 
-		public $dsParamROOTELEMENT = 'widget-entry-archive';
-		public $dsParamORDER = 'desc';
-		public $dsParamGROUP = '4';
-		public $dsParamPAGINATERESULTS = 'no';
-		public $dsParamLIMIT = '20';
-		public $dsParamSTARTPAGE = '1';
-		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamSORT = 'system:date';
-		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+    public function __construct($env = null, $process_params = true)
+    {
+        parent::__construct($env, $process_params);
+        $this->_dependencies = array();
+    }
 
-		public $dsParamFILTERS = array(
-				'5' => 'published',
-		);
+    public function about()
+    {
+        return array(
+            'name' => 'Widget Entry Archive',
+            'author' => array(
+                'name' => 'Andrew Meyer',
+                'website' => 'http://tastelicio.us',
+                'email' => 'andrew@rewdy.com'),
+            'version' => 'Symphony 2.6.1',
+            'release-date' => '2015-03-30T20:17:02+00:00'
+        );
+    }
 
-		
+    public function getSource()
+    {
+        return '1';
+    }
 
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
-			$this->_dependencies = array();
-		}
+    public function allowEditorToParse()
+    {
+        return true;
+    }
 
-		public function about(){
-			return array(
-					 'name' => 'Widget Entry Archive',
-					 'author' => array(
-							'name' => 'Andrew Meyer',
-							'website' => 'http://localhost/tasty',
-							'email' => 'andrew@iowai.org'),
-					 'version' => '1.0',
-					 'release-date' => '2011-05-18T18:37:55+00:00');
-		}
+    public function execute(array &$param_pool = null)
+    {
+        $result = new XMLElement($this->dsParamROOTELEMENT);
 
-		public function getSource(){
-			return '1';
-		}
+        try{
+            $result = parent::execute($param_pool);
+        } catch (FrontendPageNotFoundException $e) {
+            // Work around. This ensures the 404 page is displayed and
+            // is not picked up by the default catch() statement below
+            FrontendPageNotFoundExceptionHandler::render($e);
+        } catch (Exception $e) {
+            $result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
+            return $result;
+        }
 
-		public function allowEditorToParse(){
-			return true;
-		}
+        if ($this->_force_empty_result) {
+            $result = $this->emptyXMLSet();
+        }
 
-		public function grab(&$param_pool=NULL){
-			$result = new XMLElement($this->dsParamROOTELEMENT);
+        if ($this->_negate_result) {
+            $result = $this->negateXMLSet();
+        }
 
-			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
-			}
-			catch(FrontendPageNotFoundException $e){
-				// Work around. This ensures the 404 page is displayed and
-				// is not picked up by the default catch() statement below
-				FrontendPageNotFoundExceptionHandler::render($e);
-			}
-			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
-				return $result;
-			}
-
-			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
-
-			return $result;
-		}
-	}
+        return $result;
+    }
+}

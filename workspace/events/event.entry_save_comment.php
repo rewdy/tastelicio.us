@@ -6,7 +6,8 @@ class evententry_save_comment extends SectionEvent
 
     public $eParamFILTERS = array(
         'etm-new-comment-notification',
-				'xss-fail'
+				'xss-fail',
+				'validate-xsrf'
     );
 
     public static function about()
@@ -18,7 +19,7 @@ class evententry_save_comment extends SectionEvent
                 'website' => 'http://tastelicio.us',
                 'email' => 'andrew@rewdy.com'),
             'version' => 'Symphony 2.6.1',
-            'release-date' => '2015-03-30T20:00:20+00:00',
+            'release-date' => '2015-03-30T20:05:27+00:00',
             'trigger-condition' => 'action[entry-save-comment]'
         );
     }
@@ -96,7 +97,9 @@ class evententry_save_comment extends SectionEvent
                 <p>To edit an existing entry, include the entry ID value of the entry in the form. This is best as a hidden field like so:</p>
                 <pre class="XML"><code>&lt;input name="id" type="hidden" value="23" /></code></pre>
                 <p>To redirect to a different location upon a successful save, include the redirect location in the form. This is best as a hidden field like so, where the value is the URL to redirect to:</p>
-                <pre class="XML"><code>&lt;input name="redirect" type="hidden" value="http://tastelicio.us/success/" /></code></pre>';
+                <pre class="XML"><code>&lt;input name="redirect" type="hidden" value="http://tastelicio.us/success/" /></code></pre>
+                <p>To validate a XSRF token, ensure it is passed in the form.</p>
+                <pre class="XML"><code>&lt;input name="xsrf" type="hidden" value="{$cookie-xsrf-token}" /></code></pre>';
     }
 
     public function load()
