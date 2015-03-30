@@ -43,6 +43,9 @@
 		<xsl:comment>Meta</xsl:comment>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5" />
 
+		<xsl:apply-templates select="data/entry-single" mode="og-meta"/>
+		<xsl:apply-templates select="data/recipe-single" mode="og-meta"/>
+
 	</head>
 	
 	<body>
@@ -137,6 +140,17 @@
 			<xsl:value-of select="concat($page-title, ' | ', $website-name)" />
 		</xsl:otherwise>
 	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="data/entry-single" mode="og-meta">
+	<meta property="og:url" content="{$root}/blog/view/{entry/entry-title/@handle}" />
+	<meta property="og:description" content="{entry/entry-summary}" />
+	<meta property="og:image" content="{$root}/image/2/1200/630/5{entry/attached-images/item[1]/image/@path}/{entry/attached-images/item[1]/image/filename}"/>
+</xsl:template>
+<xsl:template match="data/recipe-single" mode="og-meta">
+	<meta property="og:url" content="{$root}/recipes/view/{entry/title/@handle}" />
+	<meta property="og:description" content="{entry/intro}" />
+	<meta property="og:image" content="{$root}/image/2/1200/630/5{entry/photo/@path}/{entry/photo/filename}"/>
 </xsl:template>
 
 </xsl:stylesheet>
