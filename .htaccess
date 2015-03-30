@@ -2,8 +2,7 @@
 ### Symphony 2.2.x ###
 Options +FollowSymlinks -Indexes
 
-
-<IfModule !mod_rewrite.c>
+	<IfModule !mod_rewrite.c>
 	SetEnv HTTP_MOD_REWRITE No
 </IfModule>
 
@@ -23,15 +22,9 @@ Options +FollowSymlinks -Indexes
 	RewriteCond %{REQUEST_FILENAME} favicon.ico [NC]
 	RewriteRule .* - [S=14]
 
-	
-	
 	### IMAGE RULES
 	RewriteRule ^image\/(.+)$ extensions/jit_image_manipulation/lib/image.php?param=$1 [B,L,NC]
 
-
-	
-
-	
 	### CHECK FOR TRAILING SLASH - Will ignore files
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !/$

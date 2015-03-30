@@ -47,6 +47,7 @@
 
 				// Replace the token with the real value
 				$htaccess = str_replace($token, '$1', $htaccess);
+				$htaccess = preg_replace("/(" . PHP_EOL . "(\t)?){3,}/", PHP_EOL . PHP_EOL . "\t", $htaccess);
 
 				if(file_put_contents(DOCROOT . '/.htaccess', $htaccess)) {
 					// Now add Configuration values
@@ -58,7 +59,9 @@
 
 					return Symphony::Configuration()->write();
 				}
-				else return false;
+				else {
+					return false;
+				}
 			}
 			catch (Exception $ex) {
 				Administration::instance()->Page->pageAlert(__('An error occurred while installing %s. %s', array(__('JIT Image Manipulation'), $ex->getMessage())), Alert::ERROR);
@@ -123,6 +126,7 @@
 				$htaccess = file_get_contents(DOCROOT . '/.htaccess');
 				$htaccess = self::__removeImageRules($htaccess);
 				$htaccess = preg_replace('/### IMAGE RULES/', NULL, $htaccess);
+				$htaccess = preg_replace("/(" . PHP_EOL . "(\t)?){3,}/", PHP_EOL . PHP_EOL . "\t", $htaccess);
 
 				return file_put_contents(DOCROOT . '/.htaccess', $htaccess);
 			}
@@ -434,6 +438,13 @@
 			if (Symphony::Configuration()->get('disable_upscaling', 'image') == 'yes') $input->setAttribute('checked', 'checked');
 			$label->setValue($input->generate() . ' ' . __('Disable upscaling of images beyond the original size'));
 			$group->appendChild($label);
+			
+			// checkbox to diable proxy transformation of images
+			$label = Widget::Label();
+			$input = Widget::Input('settings[image][disable_proxy_transform]', 'yes', 'checkbox');
+			if (Symphony::Configuration()->get('disable_proxy_transform', 'image') == 'yes') $input->setAttribute('checked', 'checked');
+			$label->setValue($input->generate() . ' ' . __('Prevent ISP proxy transformation'));
+			$group->appendChild($label);
 
 			// textarea for trusted sites
 			$label = Widget::Label(__('Trusted Sites'));
@@ -454,6 +465,10 @@
 
 			if (!isset($context['settings']['image']['disable_upscaling'])) {
 				$context['settings']['image']['disable_upscaling'] = 'no';
+			}
+			
+			if (!isset($context['settings']['image']['disable_proxy_transform'])) {
+				$context['settings']['image']['disable_proxy_transform'] = 'no';
 			}
 
 			// save trusted sites

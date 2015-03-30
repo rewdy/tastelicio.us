@@ -7,12 +7,10 @@
 	define('DOMAIN', rtrim(rtrim($_SERVER['HTTP_HOST'], '/') . str_replace('/extensions/jit_image_manipulation/lib', NULL, dirname($_SERVER['PHP_SELF'])), '/'));
 
 	// Include some parts of the engine
-	require_once(DOCROOT . '/symphony/lib/boot/bundle.php');
-	require_once(CORE . '/class.errorhandler.php');
-	require_once(CORE . '/class.log.php');
-	require_once('class.image.php');
-	require_once(TOOLKIT . '/class.page.php');
-	require_once(CONFIG);
+	require_once DOCROOT . '/vendor/autoload.php';
+	require_once DOCROOT . '/symphony/lib/boot/bundle.php';
+	require_once 'class.image.php';
+	require_once CONFIG;
 
 	// Setup the environment
 	if(method_exists('DateTimeObj', 'setSettings')) {
@@ -167,8 +165,6 @@
 		}
 	}
 
-	define_safe('CACHING', ($settings['image']['cache'] == 1 ? true : false));
-
 	function __errorHandler($errno=NULL, $errstr, $errfile=NULL, $errline=NULL, $errcontext=NULL){
 		global $param;
 
@@ -246,9 +242,18 @@
 	if($last_modified) {
 		$last_modified_gmt = gmdate('D, d M Y H:i:s', $last_modified) . ' GMT';
 		$etag = md5($last_modified . $image_path);
+		$cacheControl = 'public';
+		
+		// Add no-transform in order to prevent ISPs to
+		// serve image over http through a compressing proxy
+		// See #79
+		if ($settings['image']['disable_proxy_transform'] == 'yes') {
+			$cacheControl .= ', no-transform';
+		}
+		
 		header('Last-Modified: ' . $last_modified_gmt);
 		header(sprintf('ETag: "%s"', $etag));
-		header('Cache-Control: public');
+		header('Cache-Control: '. $cacheControl);
 	}
 	else {
 		$last_modified_gmt = NULL;
@@ -330,6 +335,24 @@
 	} else {
 		$dst_w = $param->width;
 		$dst_h = $param->height;
+	}
+
+	// Make sure we have a valid size
+	if ($dst_w == 0 && $dst_h == 0) {
+		// Return 400
+		Page::renderStatusCode(Page::HTTP_STATUS_BAD_REQUEST);
+		// Init log
+		Symphony::initialiseLog();
+		// Get referrer
+		$httpRef = General::sanitize($_SERVER["HTTP_REFERER"]);
+		if (!$httpRef) {
+			$httpRef = 'unknown referrer';
+		}
+		// push to log
+		Symphony::Log()->pushToLog(sprintf('Invalid size (0 x 0) requested from "%s"', $httpRef), E_WARNING, true);
+		// output and exit
+		echo 'Both width and height can not be 0';
+		exit;
 	}
 
 	// Apply the filter to the Image class (`$image`)

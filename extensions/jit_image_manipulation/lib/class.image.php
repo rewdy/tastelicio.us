@@ -64,15 +64,8 @@
 			// clean up
 			$gateway->flush();
 
-			// The `sys_get_temp_dir` is our preference, but on some shared hosting
-			// this is unavailable. If this fails, we'll attempt the `upload_tmp_dir`
-			// and then use `TMP` (the Symphony constant).
-			// @link https://github.com/symphonycms/jit_image_manipulation/commit/728adf15c9db31f2453baca6b6888cb318fb956f#comments
-			$dir = @sys_get_temp_dir();
-			if($dir == false || !is_writable($dir)) $dir = @ini_get('upload_tmp_dir');
-			if($dir == false || !is_writable($dir)) $dir = TMP;
-
-			$dest = tempnam($dir, 'IMAGE');
+			// Symphony 2.4 enhances the TMP constant so it can be relied upon
+			$dest = tempnam(TMP, 'IMAGE');
 
 			if(!file_put_contents($dest, $response)) {
 				throw new Exception(sprintf('Error writing to temporary file <code>%s</code>.', $dest));
@@ -106,12 +99,17 @@
 
 				// JPEG
 				case IMAGETYPE_JPEG:
-					if($meta->channels <= 3){
-						$resource = imagecreatefromjpeg($image);
-					}
+					// GD 2.0.22 supports basic CMYK to RGB conversion.
+					// RE: https://github.com/symphonycms/jit_image_manipulation/issues/47
+					$gdSupportsCMYK = version_compare(GD_VERSION, '2.0.22', '>=');
+
 					// Can't handle CMYK JPEG files
-					else{
+					if ($meta->channels > 3 && $gdSupportsCMYK === false) {
 						throw new Exception('Cannot load CMYK JPG images');
+
+					// Can handle CMYK, or image has less than 3 channels.
+					} else{
+						$resource = imagecreatefromjpeg($image);
 					}
 					break;
 
@@ -126,7 +124,7 @@
 			}
 
 			if(!is_resource($resource)){
-				throw new Exception(sprintf('Error loading image <code>%s</code>. Check it exists and is readable.', str_replace(DOCROOT, '', $image)));
+				throw new Exception(sprintf('Error creating image <code>%s</code>. Check it exists and is readable.', str_replace(DOCROOT, '', $image)));
 			}
 
 			$obj = new self($resource, $meta);
@@ -171,7 +169,6 @@
 		 *  than display it inline
 		 */
 		public static function renderOutputHeaders($type, $destination=NULL){
-			ob_clean();
 			header('Content-Type: ' . image_type_to_mime_type($type));
 
 			if(is_null($destination)) return;
